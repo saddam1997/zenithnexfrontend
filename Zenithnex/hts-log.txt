@@ -1,0 +1,48 @@
+HTTrack3.49-2+htsswf+htsjava launched on Wed, 11 Oct 2017 11:25:36 at http://bccwallet.io/ +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar
+(winhttrack -qwC2%Ps2u1%s%uN0%I0p3DaK0H0%kf2A25000%f#f -F "Mozilla/4.5 (compatible; HTTrack 3.0x; Windows 98)" -%F "<!-- Mirrored from %s%s by HTTrack Website Copier/3.x [XR&CO'2014], %s -->" -%l "en, *" http://bccwallet.io/ -O1 "G:\walet" +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+11:26:04	Error: 	"Not Found" (404) at link bccwallet.io/assets/img/apple-touch-icon.png (from bccwallet.io/)
+11:26:14	Error: 	"Not Found" (404) at link bccwallet.io/blog.html (from bccwallet.io/)
+11:26:14	Error: 	"Not Found" (404) at link bccwallet.io/assets/fonts/fontawesome-webfont.eot?v=4.7.0 (from bccwallet.io/assets/css/core.min.css)
+11:26:14	Error: 	"Not Found" (404) at link bccwallet.io/assets/fonts/fontawesome-webfont.eot? (from bccwallet.io/assets/css/core.min.css)
+11:26:14	Error: 	"Not Found" (404) at link bccwallet.io/assets/fonts/fontawesome-webfont.woff2?v=4.7.0 (from bccwallet.io/assets/css/core.min.css)
+11:26:14	Error: 	"Not Found" (404) at link bccwallet.io/assets/fonts/fontawesome-webfont.woff?v=4.7.0 (from bccwallet.io/assets/css/core.min.css)
+11:26:14	Error: 	"Not Found" (404) at link bccwallet.io/assets/fonts/fontawesome-webfont.ttf?v=4.7.0 (from bccwallet.io/assets/css/core.min.css)
+11:26:14	Error: 	"Not Found" (404) at link bccwallet.io/assets/fonts/fontawesome-webfont.svg?v=4.7.0 (from bccwallet.io/assets/css/core.min.css)
+11:26:14	Error: 	"Not Found" (404) at link bccwallet.io/assets/fonts/themify.eot?-fvbane (from bccwallet.io/assets/css/core.min.css)
+11:26:14	Error: 	"Not Found" (404) at link bccwallet.io/assets/fonts/themify.eot? (from bccwallet.io/assets/css/core.min.css)
+11:26:14	Error: 	"Not Found" (404) at link bccwallet.io/assets/fonts/themify.woff?-fvbane (from bccwallet.io/assets/css/core.min.css)
+11:26:14	Error: 	"Not Found" (404) at link bccwallet.io/assets/fonts/themify.ttf?-fvbane (from bccwallet.io/assets/css/core.min.css)
+11:26:14	Error: 	"Not Found" (404) at link bccwallet.io/assets/fonts/themify.svg?-fvbane (from bccwallet.io/assets/css/core.min.css)
+11:26:14	Warning: 	File not parsed, looks like binary: bccwallet.io/assets/fonts/et-line.ttf
+11:26:19	Error: 	"Not Found" (404) at link bccwallet.io/BCHwallet/login/jquery.min.js.download (from bccwallet.io/BCHwallet/login.php)
+11:26:19	Error: 	"Not Found" (404) at link bccwallet.io/BCHwallet/login/popper.min.js.download (from bccwallet.io/BCHwallet/login.php)
+11:26:19	Error: 	"Not Found" (404) at link bccwallet.io/BCHwallet/login/bootstrap.min.js.download (from bccwallet.io/BCHwallet/login.php)
+11:26:20	Error: 	"Not Found" (404) at link bccwallet.io/BCHwallet/login/jquery.slimscroll.js.download (from bccwallet.io/BCHwallet/login.php)
+11:26:20	Error: 	"Not Found" (404) at link bccwallet.io/BCHwallet/login/waves.js.download (from bccwallet.io/BCHwallet/login.php)
+11:26:20	Error: 	"Not Found" (404) at link bccwallet.io/BCHwallet/login/sidebarmenu.js.download (from bccwallet.io/BCHwallet/login.php)
+11:26:20	Error: 	"Not Found" (404) at link bccwallet.io/BCHwallet/login/sticky-kit.min.js.download (from bccwallet.io/BCHwallet/login.php)
+11:26:20	Error: 	"Not Found" (404) at link bccwallet.io/BCHwallet/login/jquery.sparkline.min.js.download (from bccwallet.io/BCHwallet/login.php)
+11:26:20	Error: 	"Not Found" (404) at link bccwallet.io/BCHwallet/login/custom.min.js.download (from bccwallet.io/BCHwallet/login.php)
+11:26:20	Error: 	"Not Found" (404) at link bccwallet.io/BCHwallet/login/jQuery.style.switcher.js.download (from bccwallet.io/BCHwallet/login.php)
+11:26:20	Error: 	"Not Found" (404) at link bccwallet.io/BCHwallet/scss/icons/font-awesome/css/font-awesome.min.css (from bccwallet.io/BCHwallet/login/style.css)
+11:26:20	Error: 	"Not Found" (404) at link bccwallet.io/BCHwallet/scss/icons/simple-line-icons/css/simple-line-icons.css (from bccwallet.io/BCHwallet/login/style.css)
+11:26:20	Error: 	"Not Found" (404) at link bccwallet.io/BCHwallet/scss/icons/weather-icons/css/weather-icons.min.css (from bccwallet.io/BCHwallet/login/style.css)
+11:26:20	Error: 	"Not Found" (404) at link bccwallet.io/BCHwallet/scss/icons/linea-icons/linea.css (from bccwallet.io/BCHwallet/login/style.css)
+11:26:20	Error: 	"Not Found" (404) at link bccwallet.io/BCHwallet/scss/icons/themify-icons/themify-icons.css (from bccwallet.io/BCHwallet/login/style.css)
+11:26:20	Error: 	"Not Found" (404) at link bccwallet.io/BCHwallet/scss/icons/flag-icon-css/flag-icon.min.css (from bccwallet.io/BCHwallet/login/style.css)
+11:26:20	Error: 	"Not Found" (404) at link bccwallet.io/BCHwallet/scss/icons/material-design-iconic-font/css/materialdesignicons.min.css (from bccwallet.io/BCHwallet/login/style.css)
+11:26:20	Error: 	"Not Found" (404) at link bccwallet.io/BCHwallet/css/spinners.css (from bccwallet.io/BCHwallet/login/style.css)
+11:26:20	Error: 	"Not Found" (404) at link bccwallet.io/BCHwallet/css/animate.css (from bccwallet.io/BCHwallet/login/style.css)
+11:26:20	Error: 	"Not Found" (404) at link bccwallet.io/assets/images/custom-select.png (from bccwallet.io/BCHwallet/login/style.css)
+11:26:20	Error: 	"Not Found" (404) at link bccwallet.io/assets/images/tooltip/tooltip1.svg (from bccwallet.io/BCHwallet/login/style.css)
+11:26:20	Error: 	"Not Found" (404) at link bccwallet.io/assets/images/tooltip/shape1.svg (from bccwallet.io/BCHwallet/login/style.css)
+11:26:20	Error: 	"Not Found" (404) at link bccwallet.io/assets/images/background/error-bg.jpg (from bccwallet.io/BCHwallet/login/style.css)
+
+HTTrack Website Copier/3.49-2 mirror complete in 44 seconds : 67 links scanned, 30 files written (1939550 bytes overall) [1091133 bytes received at 24798 bytes/sec], 1098262 bytes transferred using HTTP compression in 16 files, ratio 20%, 5.5 requests per connection
+(36 errors, 1 warnings, 0 messages)

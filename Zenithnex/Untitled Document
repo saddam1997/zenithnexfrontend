@@ -1,0 +1,216 @@
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
+
+<!-- forget -->
+ <div id="id03" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+
+      <div class="w3-center"><br>
+        <span onclick="document.getElementById('id03').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+        New Address Genrate
+      </div>
+
+         <?php $client = "";
+     /* $wallet_address = "";
+      if(_LIVE_)
+      {
+        $client = new Client($rpc_host, $rpc_port, $rpc_user, $rpc_pass);
+        if(isset($client))
+        {
+           $new=$client->getnewaddress($user_session);
+	   
+        }
+        }*/
+        ?>
+        
+
+      
+        <div class="w3-section">
+           <label><b>New Address:</b></label>
+          <input class="w3-input w3-border w3-margin-bottom" type="email" placeholder="Enter Email" name="txtEmailID" required value="<?php echo $new;?>">
+        </div>
+
+   <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+        <button onclick="window.location.href=''" type="button" class="w3-button w3-green">Confirm</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- send  id04-->
+<div id="id04" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+
+      <div class="w3-left"><br>
+        <span onclick="document.getElementById('id04').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+      <em class="fa fa-send" style="margin-left: 30px;"></em> Send 
+      </div>
+
+      
+      <form  role="frm" class="w3-container" action="lib/send.php" method="post" >
+        <hr>
+          
+          <div class="form-group">
+            <label for="usr">TO:</label>
+            <input id="btcaddress"  name ="btcaddress" 
+                          placeholder="Paste recipient BX Address" autocomplete="off" type="text" class="form-control" required>
+          </div>
+          
+          <div class="form-group">
+              <label for="usr">Amount EBT:</label>
+              <input id="btcval" name="txtChar" placeholder="Paste recipient BX Address" autocomplete="off" type="text" class="form-control" required>
+          </div>
+       
+          
+          <div class="form-group">
+            <label for="usr">Description:</label>
+            <textarea id="discription" name ="discription" class="form-control" placeholder="Description" class="form-control"></textarea>
+          </div>
+          <div  class="form-group">
+              <label style="float:left">Spending Password</label>
+              <input id="spendingpassword" name="spendingpassword" class="form-control" autocomplete="off" type="password" value="">
+                
+          </div>
+          
+          <button class="w3-button w3-block w3-blue w3-section w3-padding" type="submit">Send</button>
+           <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+      
+      </div>
+          
+        </div>
+      </form>
+
+  
+
+    </div>
+  </div>
+</div>
+
+<!-- close -->
+<!-- send id05-->
+<div id="id05" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+
+      <div class="w3-center"><br>
+        <span onclick="document.getElementById('id05').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+ Recieve
+      </div>
+ 
+      <form  role="frm" class="w3-container" action="#" method="post" >
+        <hr>
+         
+          <div class="form-group">
+            
+            <label for="usr">Deposit EBT Coin</label>
+            <?php 
+            if(_LIVE_)
+            {
+              $client = new Client($rpc_host, $rpc_port, $rpc_user, $rpc_pass);
+              if(isset($client))
+              {
+                $new_address = $client->getAddress($user_session);
+                $user_current_balance = $client->getBalance($user_session) - $fee;
+              }
+            }
+            ?>
+            <input type="text" class="form-control" id="copy" value="<?php echo $new_address;?> "><br>
+            <center><label style="padding:0px;margin-top:-5px;">
+                          <a href="http://chart.apis.google.com/chart?cht=qr&chs=300x300&chl=<?php echo $new_address?>">
+                        <img src="http://chart.apis.google.com/chart?cht=qr&chs=300x300&chl=<?php echo $new_address?>" 
+                        alt="QR Code" style="width:200px;border:0;"/></a></label></center>
+           
+          <div>
+			Have you Any Problem?<a style="color:green;" href="contactus.php"> ContactUs </a>We are Happy to help you.
+		</div>
+          <button class="w3-button w3-block w3-blue w3-section w3-padding" type="submit">Done</button>
+          <!--<div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+        <button onclick="document.getElementById('id05').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
+      </div>-->
+          <hr>
+		
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- close -->
+
+<!-- 
+  <div id="id01" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+
+      <div class="w3-center"><br>
+        <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+        Address
+      </div>
+
+      <div class="w3-section">
+        
+         
+        </div>
+      <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+
+        <span class="w3-right w3-padding w3-hide-small"><a onclick="document.getElementById('id03').style.display='block'">Forgot Password</a></span> 
+      </div>
+
+    </div>
+  </div> -->
+  <!-- start 4 -->
+  <div id="id07" class="w3-modal">
+    <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+
+      <div class="w3-center"><br>
+        <span onclick="document.getElementById('id07').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+        Transaction 
+      </div>
+
+         <?php $client = "";
+      /*$wallet_address = "";
+      if(_LIVE_)
+      {
+        $client = new Client($rpc_host, $rpc_port, $rpc_user, $rpc_pass);
+        if(isset($client))
+        {
+           $new=$client->getnewaddress('blabla');
+        }
+        }*/
+        ?>
+        
+
+      
+        <div class="w3-section">
+            <form  role="frm" class="w3-container" action="lib/send_btc.php" method="post" >
+        <hr>
+          
+          <div class="form-group">
+          
+          <div class="form-group">
+              <label for="usr">BTC:</label>
+              <input id="btcval" name="txtChar" placeholder="Enter BTC" autocomplete="off" type="text" class="form-control" required>
+          </div>
+          <div class="form-group">
+              <label for="usr">Transection Id:</label>
+              <input id="btcval" name="txtChar" placeholder="Paste recipient BX Address" autocomplete="off" type="text" class="form-control" required>
+          </div>
+       
+         
+         
+          
+          <button class="w3-button w3-block w3-blue w3-section w3-padding" type="submit">Send</button>
+       
+       
+      </div>
+          
+        </div>
+      </form>
+        </div>
+
+   
+
+    </div>
+  </div>
+</div>
+  <!-- close -->

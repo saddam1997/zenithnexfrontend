@@ -1,6 +1,6 @@
 <?php
 error_reporting(1);
-
+include_once('common.php');
 if(isset($_POST['btnsignup']))
 {
 //  var_dump($_POST);
@@ -29,7 +29,7 @@ $context = stream_context_create(array(
   ));
 
 
-$response = file_get_contents('http://192.168.1.15:1338/user/createNewUser', FALSE, $context);
+$response = file_get_contents($url_api.'/user/createNewUser', FALSE, $context);
 
 if($response === FALSE){
   die('Error');

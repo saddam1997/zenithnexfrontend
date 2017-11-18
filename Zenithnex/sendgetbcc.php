@@ -39,7 +39,7 @@ $user_current_balance_BCH = $_SESSION['BCHbalance'];
           ));
 
 
-        $response = file_get_contents('http://192.168.1.15:1338/usertransaction/sendBCH', FALSE, $context);
+        $response = file_get_contents($url_api.'/usertransaction/sendBCH', FALSE, $context);
 
         if($response === FALSE){
           die('Error');

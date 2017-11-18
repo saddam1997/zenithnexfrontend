@@ -39,7 +39,7 @@ $user_current_balance_EBT = $_SESSION['EBTbalance'];
           ));
 
 
-        $response = file_get_contents('http://192.168.1.15:1338/usertransaction/sendEBT', FALSE, $context);
+        $response = file_get_contents($url_api.'/usertransaction/sendEBT', FALSE, $context);
 
         if($response === FALSE){
           die('Error');

@@ -141,7 +141,7 @@ $donation_address = "NUQ5EQVo2BVV7ENwPbYD854dCp85cVFrCB"; //Donation Address
 $fee = "0.001"; //Set a fee to prevent negitive balances.  
 /*api server*/	
 $bchmarket='192.168.1.15:1338';
-$url_api="http//192.168.1.15:1338";
+$url_api="http://192.168.1.16:1338";
 /*close*/
 function sendpmail($smto, $smsub, $smbody)
 {

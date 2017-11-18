@@ -21,10 +21,10 @@ $context = stream_context_create(array(
   ));
 
 
-$response1 = file_get_contents('http://192.168.1.15:1338/usertransaction/getBalBTC', FALSE, $context);
-$response2 = file_get_contents('http://192.168.1.15:1338/usertransaction/getBalBCH', FALSE, $context);
-$response3 = file_get_contents('http://192.168.1.15:1338/usertransaction/getBalGDS', FALSE, $context);
-$response4 = file_get_contents('http://192.168.1.15:1338/usertransaction/getBalEBT', FALSE, $context);
+$response1 = file_get_contents($url_api.'/usertransaction/getBalBTC', FALSE, $context);
+$response2 = file_get_contents($url_api.'/usertransaction/getBalBCH', FALSE, $context);
+$response3 = file_get_contents($url_api.'/usertransaction/getBalGDS', FALSE, $context);
+$response4 = file_get_contents($url_api.'/usertransaction/getBalEBT', FALSE, $context);
 
 if($response1 === FALSE){
   die('Error');

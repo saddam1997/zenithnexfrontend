@@ -38,7 +38,7 @@ if(isset($_POST['btnlogin']))
 		));
 
 
-	$response = file_get_contents('http://192.168.1.18:1338/user/updateCurrentPassword', TRUE, $context);
+	$response = file_get_contents($url_api.'/user/updateCurrentPassword', TRUE, $context);
 
 	if($response === FALSE){
 		die('Error');
@@ -83,7 +83,7 @@ if(isset($_POST['btnSpending']))
 		));
 
 
-	$response = file_get_contents('http://192.168.1.18:1338/user/updateCurrentSpendingPassword', TRUE, $context);
+	$response = file_get_contents($url_api.'/user/updateCurrentSpendingPassword', TRUE, $context);
 
 	if($response === FALSE){
 		die('Error');
@@ -124,7 +124,7 @@ if(isset($_POST['btnverify']))
 		));
 
 
-	$response = file_get_contents('http://192.168.1.18:1338/user/sentOtpToEmailVerificatation', TRUE, $context);
+	$response = file_get_contents($url_api.'/user/sentOtpToEmailVerificatation', TRUE, $context);
 
 	if($response === FALSE){
 		die('Error');

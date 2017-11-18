@@ -9,8 +9,6 @@ if(!isset($_SESSION['user_id']))
 $user_session = $_SESSION['user_session'];
 
 
-
-
 $postData = array(
   "userMailId"=> $user_session
 
@@ -26,11 +24,11 @@ $context = stream_context_create(array(
   ));
 
 
-$response = file_get_contents('http://192.168.1.15:1338/user/getAllDetailsOfUser', FALSE, $context);
-$response1 = file_get_contents('http://192.168.1.15:1338/usertransaction/getTxsListBTC', FALSE, $context);
-$response2 = file_get_contents('http://192.168.1.15:1338/usertransaction/getTxsListBCH', FALSE, $context);
-$response3 = file_get_contents('http://192.168.1.15:1338/usertransaction/getTxsListGDS', FALSE, $context);
-$response4 = file_get_contents('http://192.168.1.15:1338/usertransaction/getTxsListEBT', FALSE, $context);
+$response = file_get_contents($url_api.'/user/getAllDetailsOfUser', FALSE, $context);
+$response1 = file_get_contents($url_api.'/usertransaction/getTxsListBTC', FALSE, $context);
+$response2 = file_get_contents($url_api.'/usertransaction/getTxsListBCH', FALSE, $context);
+$response3 = file_get_contents($url_api.'/usertransaction/getTxsListGDS', FALSE, $context);
+$response4 = file_get_contents($url_api.'/usertransaction/getTxsListEBT', FALSE, $context);
 
 if($response === FALSE){
   die('Error');
@@ -554,7 +552,7 @@ $.getJSON(url_api + '/tradebchmarket/getAllBidBCH', function (data) {
                                             <div class="col-md-6">
                                               <div class="card style" >
                                                 <div class="card-header bg-success">
-                                                  <div class="h4 font-weight-normal">Last Orders</div>
+                                                  <div class="h4 font-weight-normal">Last Transaction</div>
                                                 </div>
                                                 <div class="card-body">
                                              <table class="table table-responsive table-hover table-outline mb-0">

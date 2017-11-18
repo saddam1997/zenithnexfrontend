@@ -40,7 +40,7 @@ $user_current_balance_BTC = $_SESSION['BTCbalance'];
           ));
 
 
-        $response = file_get_contents('http://192.168.1.15:1338/usertransaction/sendBTC', FALSE, $context);
+        $response = file_get_contents($url_api.'/usertransaction/sendBTC', FALSE, $context);
 
         if($response === FALSE){
           die('Error');

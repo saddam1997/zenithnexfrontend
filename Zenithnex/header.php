@@ -29,14 +29,14 @@ if(!isset($_SESSION['user_id']))
     <!-- MDL LIB --> 
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
-     <!-- <script type="text/javascript" src="js/sails.io.js"></script> -->
+    
     <!-- Main styles for this application -->
     <link href="css/style.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
     <script type="text/javascript">
-        // io.sails.url = 'http://192.168.1.18:1338';
-        url_api='http://192.168.1.18:1338';
+        
+        url_api='http://192.168.1.16:1338';
     </script>
 </head>
 

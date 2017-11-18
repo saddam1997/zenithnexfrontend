@@ -1,6 +1,8 @@
 <?php
 error_reporting(1);
 session_start();
+
+
 $success = $_GET['m'];
 $forget = $_GET['f'];
 
@@ -25,9 +27,9 @@ $context = stream_context_create(array(
     'content' => json_encode($postData)
     )
   ));
+include_once('common.php');
 
-
-$response = file_get_contents('http://192.168.1.15:1338/auth/authentcate', FALSE, $context);
+$response = file_get_contents($url_api.'/auth/authentcate', FALSE, $context);
 
 if($response === FALSE){
   die('Error');

@@ -25,7 +25,7 @@ $context = stream_context_create(array(
   ));
 
 
-$response = file_get_contents('http://192.168.1.15:1338/usertransaction/getTxsListEBT', FALSE, $context);
+$response = file_get_contents($url_api.'/usertransaction/getTxsListEBT', FALSE, $context);
 
 if($response === FALSE){
   die('Error');

@@ -40,7 +40,7 @@ $user_current_balance_GDS = $_SESSION['GDSbalance'];
           ));
 
 
-        $response = file_get_contents('http://192.168.1.15:1338/usertransaction/sendGDS', FALSE, $context);
+        $response = file_get_contents($url_api.'/usertransaction/sendGDS', FALSE, $context);
 
         if($response === FALSE){
           die('Error');

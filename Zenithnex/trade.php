@@ -24,7 +24,7 @@ $context = stream_context_create(array(
   ));
 
 
-$response = file_get_contents('http://192.168.1.15:1338/user/getAllDetailsOfUser', FALSE, $context);
+$response = file_get_contents($url_api.'/user/getAllDetailsOfUser', FALSE, $context);
 
 if($response === FALSE){
   die('Error');
@@ -88,7 +88,7 @@ if(isset($_POST['btnbtcdeposit']))
     ));
 
 
-  $response = file_get_contents('http://192.168.1.15:1338/depositeintrade/depositeInWalletBTC', FALSE, $context);
+  $response = file_get_contents($url_api.'/depositeintrade/depositeInWalletBTC', FALSE, $context);
 
   if($response === FALSE){
     die('Error');
@@ -134,7 +134,7 @@ if(isset($_POST['btnbccdeposit']))
     ));
 
 
-  $response = file_get_contents('http://192.168.1.15:1338/depositeintrade/depositeInWalletBCH', FALSE, $context);
+  $response = file_get_contents($url_api.'/depositeintrade/depositeInWalletBCH', FALSE, $context);
 
   if($response === FALSE){
     die('Error');
@@ -179,7 +179,7 @@ if(isset($_POST['btngdsdeposit']))
     ));
 
 
-  $response = file_get_contents('http://192.168.1.15:1338/depositeintrade/depositeInWalletGDS', FALSE, $context);
+  $response = file_get_contents($url_api.'/depositeintrade/depositeInWalletGDS', FALSE, $context);
 
   if($response === FALSE){
     die('Error');
@@ -224,7 +224,7 @@ if(isset($_POST['btnebtdeposit']))
     ));
 
 
-  $response = file_get_contents('http://192.168.1.15:1338/depositeintrade/depositeInWalletEBT', FALSE, $context);
+  $response = file_get_contents($url_api.'/depositeintrade/depositeInWalletEBT', FALSE, $context);
 
   if($response === FALSE){
     die('Error');
@@ -272,7 +272,7 @@ if(isset($_POST['btnbtcwithdraw']))
     ));
 
 
-  $response = file_get_contents('http://192.168.1.15:1338/depositeintrade/withdrawInWalletBTC', FALSE, $context);
+  $response = file_get_contents($url_api.'/depositeintrade/withdrawInWalletBTC', FALSE, $context);
 
   if($response === FALSE){
     die('Error');
@@ -317,7 +317,7 @@ if(isset($_POST['btnbccwithdraw']))
     ));
 
 
-  $response = file_get_contents('http://192.168.1.15:1338/depositeintrade/withdrawInWalletBCH', FALSE, $context);
+  $response = file_get_contents($url_api.'/depositeintrade/withdrawInWalletBCH', FALSE, $context);
 
   if($response === FALSE){
     die('Error');
@@ -363,7 +363,7 @@ if(isset($_POST['btngdswithdraw']))
     ));
 
 
-  $response = file_get_contents('http://192.168.1.15:1338/depositeintrade/withdrawInWalletGDS', FALSE, $context);
+  $response = file_get_contents($url_api.'/depositeintrade/withdrawInWalletGDS', FALSE, $context);
 
   if($response === FALSE){
     die('Error');
@@ -409,7 +409,7 @@ if(isset($_POST['btnebtwithdraw']))
     ));
 
 
-  $response = file_get_contents('http://192.168.1.15:1338/depositeintrade/withdrawInWalletEBT', FALSE, $context);
+  $response = file_get_contents($url_api.'/depositeintrade/withdrawInWalletEBT', FALSE, $context);
 
   if($response === FALSE){
     die('Error');

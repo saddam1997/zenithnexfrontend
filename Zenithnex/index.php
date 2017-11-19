@@ -1,10 +1,9 @@
-<?php 
+<?php
 error_reporting(1);
 include_once('common.php');
 page_protect();
-if(!isset($_SESSION['user_id']))
-{
-	header("location:logout.php");
+if (!isset($_SESSION['user_id'])) {
+    header("location:logout.php");
 }
 $user_session = $_SESSION['user_session'];
 
@@ -24,83 +23,76 @@ $context = stream_context_create(array(
   ));
 
 
-$response = file_get_contents($url_api.'/user/getAllDetailsOfUser', FALSE, $context);
-$response1 = file_get_contents($url_api.'/usertransaction/getTxsListBTC', FALSE, $context);
-$response2 = file_get_contents($url_api.'/usertransaction/getTxsListBCH', FALSE, $context);
-$response3 = file_get_contents($url_api.'/usertransaction/getTxsListGDS', FALSE, $context);
-$response4 = file_get_contents($url_api.'/usertransaction/getTxsListEBT', FALSE, $context);
+$response = file_get_contents($url_api.'/user/getAllDetailsOfUser', false, $context);
+$response1 = file_get_contents($url_api.'/usertransaction/getTxsListBTC', false, $context);
+$response2 = file_get_contents($url_api.'/usertransaction/getTxsListBCH', false, $context);
+$response3 = file_get_contents($url_api.'/usertransaction/getTxsListGDS', false, $context);
+$response4 = file_get_contents($url_api.'/usertransaction/getTxsListEBT', false, $context);
 
-if($response === FALSE){
-  die('Error');
+if ($response === false) {
+    die('Error');
 }
-if($response1 === FALSE){
-  die('Error');
+if ($response1 === false) {
+    die('Error');
 }
-if($response2 === FALSE){
-  die('Error');
+if ($response2 === false) {
+    die('Error');
 }
-if($response3 === FALSE){
-  die('Error');
+if ($response3 === false) {
+    die('Error');
 }
-if($response4 === FALSE){
-  die('Error');
+if ($response4 === false) {
+    die('Error');
 }
 
 
-$responseData = json_decode($response, TRUE);
-$responseData1 = json_decode($response1, TRUE);
-$responseData2 = json_decode($response1, TRUE);
-$responseData3 = json_decode($response1, TRUE);
-$responseData4 = json_decode($response1, TRUE);
+$responseData = json_decode($response, true);
+$responseData1 = json_decode($response1, true);
+$responseData2 = json_decode($response1, true);
+$responseData3 = json_decode($response1, true);
+$responseData4 = json_decode($response1, true);
 
 
-if(isset($responseData['user']))
-{
+if (isset($responseData['user'])) {
+    $btc_balance = $responseData['user']['BTCMainbalance'];
+    $bcc_balance = $responseData['user']['BCHMainbalance'];
+    $gds_balance = $responseData['user']['GDSMainbalance'];
+    $ebt_balance = $responseData['user']['EBTMainbalance'];
 
-  $btc_balance = $responseData['user']['BTCMainbalance'];
-  $bcc_balance = $responseData['user']['BCHMainbalance'];
-  $gds_balance = $responseData['user']['GDSMainbalance'];
-  $ebt_balance = $responseData['user']['EBTMainbalance'];
+    $user_BTCtradebalance = $responseData['user']['BTCbalance'];
+    $user_BCHtradebalance = $responseData['user']['BCHbalance'];
+    $user_GDStradebalance = $responseData['user']['GDSbalance'];
+    $user_EBTtradebalance = $responseData['user']['EBTbalance'];
 
-  $user_BTCtradebalance = $responseData['user']['BTCbalance'];
-  $user_BCHtradebalance = $responseData['user']['BCHbalance'];
-  $user_GDStradebalance = $responseData['user']['GDSbalance'];
-  $user_EBTtradebalance = $responseData['user']['EBTbalance'];
-
-  $bccbids = $responseData['user']['bidsBCH'];
-  $bccbid = array_reverse($bccbids);
-  $gdsbids = $responseData['user']['bidsGDS'];
-  $gdsbid = array_reverse($gdsbids);
-  $ebtbids = $responseData['user']['bidsEBT'];
-  $ebtbid = array_reverse($ebtbids);
+    $bccbids = $responseData['user']['bidsBCH'];
+    $bccbid = array_reverse($bccbids);
+    $gdsbids = $responseData['user']['bidsGDS'];
+    $gdsbid = array_reverse($gdsbids);
+    $ebtbids = $responseData['user']['bidsEBT'];
+    $ebtbid = array_reverse($ebtbids);
 
 
-  $bccasks = $responseData['user']['asksBCH'];
-  $bccask = array_reverse($bccasks);
-  $gdsasks = $responseData['user']['asksGDS'];
-  $gdsask = array_reverse($gdsasks);
-  $ebtasks = $responseData['user']['asksEBT'];
-  $ebtask = array_reverse($ebtasks);
+    $bccasks = $responseData['user']['asksBCH'];
+    $bccask = array_reverse($bccasks);
+    $gdsasks = $responseData['user']['asksGDS'];
+    $gdsask = array_reverse($gdsasks);
+    $ebtasks = $responseData['user']['asksEBT'];
+    $ebtask = array_reverse($ebtasks);
 
-  $depositwithdraws = $responseData['user']['tradebalanceorderDetails'];
-  $depositwithdraw = array_reverse($depositwithdraws);
-
+    $depositwithdraws = $responseData['user']['tradebalanceorderDetails'];
+    $depositwithdraw = array_reverse($depositwithdraws);
 }
-if(isset($responseData1['tx']))
-{
-  $transactionList_BTC = $responseData1['tx'];
+if (isset($responseData1['tx'])) {
+    $transactionList_BTC = $responseData1['tx'];
 }
-if(isset($responseData2['tx']))
-{
-  $transactionList_BCH = $responseData2['tx'];
+if (isset($responseData2['tx'])) {
+    $transactionList_BCH = $responseData2['tx'];
 }
-if(isset($responseData3['tx']))
-{
-  $transactionList_GDS = $responseData3['tx'];
+if (isset($responseData3['tx'])) {
+    $transactionList_GDS = $responseData3['tx'];
 }
-if(isset($responseData4['tx']))
-{
-  $transactionList_EBT = $responseData4['tx'];
+if (isset($responseData4['tx'])) {
+    $transactionList_EBT = $responseData4['tx'];
 }
 
 
@@ -141,7 +133,7 @@ include 'header.php';
                 </div>
               </div>
             </div>
-<script>  
+<script>
 $.getJSON(url_api + '/tradebchmarket/getAllBidBCH', function (data) {
     var datanew = [];
    //console.log(data);
@@ -153,22 +145,22 @@ $.getJSON(url_api + '/tradebchmarket/getAllBidBCH', function (data) {
     var  temp =data.bidsBCH;
     var date = 1317888000000;
       for (var i = 0; i < temp.length; i++) {
-       
+
         date = date + 60000;
         arrayObject.push([date , temp[i].bidRate]);
-        
+
       }
-    
+
     // Create the chart
       Highcharts.stockChart('container', {
 
 
         title: {
-            text: 'AAPL stock price by minute'
+            text: 'BCH Price'
         },
 
         subtitle: {
-            text: 'Using explicit breaks for nights and weekends'
+            text: 'Bitcoin Cash Price Chart'
         },
 
         xAxis: {
@@ -239,7 +231,7 @@ $.getJSON(url_api + '/tradebchmarket/getAllBidBCH', function (data) {
     });
 });
 
-</script>  
+</script>
 			<div class="col-md-6">
         <div class="card style" >
           <div class="card-header bg-success">
@@ -248,11 +240,11 @@ $.getJSON(url_api + '/tradebchmarket/getAllBidBCH', function (data) {
           <div class="card-body">
             <table class="table table-responsive table-hover table-outline mb-0">
               <thead class="thead-default">
-                <tr>          
+                <tr>
                   <th>Currency</th>
                   <th>Main Balance</th>
                   <th>Trade Balance</th>
-                  
+
                 </tr>
               </thead>
               <tbody>
@@ -279,7 +271,7 @@ $.getJSON(url_api + '/tradebchmarket/getAllBidBCH', function (data) {
               </tbody>
             </table>
           </div>
-        </div>   
+        </div>
       </div>
 
       <div class="col-md-6">
@@ -302,7 +294,7 @@ $.getJSON(url_api + '/tradebchmarket/getAllBidBCH', function (data) {
               <div  class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                 <table class="table table-responsive table-hover table-outline mb-0">
                   <thead class="thead-default">
-                    <tr>          
+                    <tr>
 
                       <th>Market</th>
                       <th>Ammount</th>
@@ -316,85 +308,67 @@ $.getJSON(url_api + '/tradebchmarket/getAllBidBCH', function (data) {
                     <tr>
                      <!--  BCH BID -->
                      <td><a href="markettrade.php">BCH/BTC</a></td>
-                     <td><?php if(!empty($bccbid))
-                      {
-                        echo $bccbid[0]['bidAmountBCH'];
-                      }
-                      else
-                      {
-                        echo "<td colspan=\"3\">There is no BID exists</td>";
+                     <td><?php if (!empty($bccbid)) {
+    echo $bccbid[0]['bidAmountBCH'];
+} else {
+                          echo "<td colspan=\"3\">There is no BID exists</td>";
                       }
                       ?></td>
-                      <td><?php if(!empty($bccbid))
-                        {
+                      <td><?php if (!empty($bccbid)) {
                           echo $bccbid[0]['bidRate'];
-                        }
+                      }
                         ?></td>
-                        <td><?php if(!empty($bccbid))
-                          {
+                        <td><?php if (!empty($bccbid)) {
                             echo $bccbid[0]['bidAmountBTC'];
-                          }
+                        }
                           ?></td>
-                          <td><?php if(!empty($bccbid))
-                            {
+                          <td><?php if (!empty($bccbid)) {
                               echo $bccbid[0]['statusName'];
-                            }
+                          }
                             ?></td>
                           </tr>
                           <!--  GDS BID -->
                           <tr>
                             <td><a href="gds.php">GDS/BTC</a></td>
-                            <td><?php if(!empty($gdsbid))
-                              {
+                            <td><?php if (!empty($gdsbid)) {
                                 echo $gdsbid[0]['bidAmountGDS'];
-                              }
-                              else
-                              {
-                                echo "<td colspan=\"3\">There is no BID exists</td>";
+                            } else {
+                                  echo "<td colspan=\"3\">There is no BID exists</td>";
                               }
                               ?></td>
-                              <td><?php if(!empty($gdsbid))
-                                {
+                              <td><?php if (!empty($gdsbid)) {
                                   echo $gdsbid[0]['bidRate'];
-                                }
+                              }
                                 ?></td>
-                                <td><?php if(!empty($gdsbid))
-                                  {
+                                <td><?php if (!empty($gdsbid)) {
                                     echo $gdsbid[0]['bidAmountBTC'];
-                                  }
+                                }
                                   ?></td>
-                                  <td><?php if(!empty($gdsbid))
-                                    {
+                                  <td><?php if (!empty($gdsbid)) {
                                       echo $gdsbid[0]['statusName'];
-                                    }
+                                  }
                                     ?></td>
                                   </tr>
                                   <!--  EBT BID -->
                                   <tr>
                                     <td><a href="ebt.php">EBT/BTC</a></td>
-                                    <td><?php if(!empty($ebtbid))
-                                      {
+                                    <td><?php if (!empty($ebtbid)) {
                                         echo $ebtbid[0]['bidAmountEBT'];
-                                      }
-                                      else
-                                      {
-                                        echo "<td colspan=\"3\">There is no BID exists</td>";
+                                    } else {
+                                          echo "<td colspan=\"3\">There is no BID exists</td>";
                                       }
                                       ?></td>
-                                      <td><?php if(!empty($ebtbid))
-                                        {
+                                      <td><?php if (!empty($ebtbid)) {
                                           echo $ebtbid[0]['bidRate'];
-                                        }
+                                      }
                                         ?></td>
-                                        <td><?php if(!empty($ebtbid))
-                                          {
+                                        <td><?php if (!empty($ebtbid)) {
                                             echo $ebtbid[0]['bidAmountBTC'];
-                                          }
+                                        }
                                           ?></td>
-                                          <td><?php if(!empty($ebtbid))
-                                            {
+                                          <td><?php if (!empty($ebtbid)) {
                                               echo $ebtbid[0]['statusName'];
-                                            }
+                                          }
                                             ?></td>
                                           </tr>
 
@@ -404,7 +378,7 @@ $.getJSON(url_api + '/tradebchmarket/getAllBidBCH', function (data) {
                                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                                       <table class="table table-responsive table-hover table-outline mb-0">
                                         <thead class="thead-default">
-                                          <tr>          
+                                          <tr>
 
                                             <th>Market</th>
                                             <th>Ammount</th>
@@ -418,85 +392,67 @@ $.getJSON(url_api + '/tradebchmarket/getAllBidBCH', function (data) {
                                           <tr>
                                            <!--  BCH Ask -->
                                            <td><a href="markettrade.php">BCH/BTC</a></td>
-                                           <td><?php if(!empty($bccask))
-                                            {
-                                              echo $bccask[0]['askAmountBCH'];
-                                            }
-                                            else
-                                            {
-                                              echo "<td colspan=\"3\">There is no ASK exists</td>";
+                                           <td><?php if (!empty($bccask)) {
+                                                echo $bccask[0]['askAmountBCH'];
+                                            } else {
+                                                echo "<td colspan=\"3\">There is no ASK exists</td>";
                                             }
                                             ?></td>
-                                            <td><?php if(!empty($bccask))
-                                              {
+                                            <td><?php if (!empty($bccask)) {
                                                 echo $bccask[0]['askRate'];
-                                              }
+                                            }
                                               ?></td>
-                                              <td><?php if(!empty($bccask))
-                                                {
+                                              <td><?php if (!empty($bccask)) {
                                                   echo $bccask[0]['askAmountBTC'];
-                                                }
+                                              }
                                                 ?></td>
-                                                <td><?php if(!empty($bccask))
-                                                  {
+                                                <td><?php if (!empty($bccask)) {
                                                     echo $bccask[0]['statusName'];
-                                                  }
+                                                }
                                                   ?></td>
                                                 </tr>
                                                 <!--  GDS ASK -->
                                                 <tr>
                                                   <td><a href="gds.php">GDS/BTC</a></td>
-                                                  <td><?php if(!empty($gdsask))
-                                                    {
+                                                  <td><?php if (!empty($gdsask)) {
                                                       echo $gdsask[0]['askAmountGDS'];
-                                                    }
-                                                    else
-                                                    {
-                                                      echo "<td colspan=\"3\">There is no ASK exists</td>";
+                                                  } else {
+                                                        echo "<td colspan=\"3\">There is no ASK exists</td>";
                                                     }
                                                     ?></td>
-                                                    <td><?php if(!empty($gdsask))
-                                                      {
+                                                    <td><?php if (!empty($gdsask)) {
                                                         echo $gdsask[0]['askRate'];
-                                                      }
+                                                    }
                                                       ?></td>
-                                                      <td><?php if(!empty($gdsask))
-                                                        {
+                                                      <td><?php if (!empty($gdsask)) {
                                                           echo $gdsask[0]['askAmountBTC'];
-                                                        }
+                                                      }
                                                         ?></td>
-                                                        <td><?php if(!empty($gdsask))
-                                                          {
+                                                        <td><?php if (!empty($gdsask)) {
                                                             echo $gdsask[0]['statusName'];
-                                                          }
+                                                        }
                                                           ?></td>
                                                         </tr>
                                                         <!--  EBT ASk -->
                                                         <tr>
                                                           <td><a href="ebt.php">EBT/BTC</a></td>
-                                                          <td><?php if(!empty($ebtask))
-                                                            {
+                                                          <td><?php if (!empty($ebtask)) {
                                                               echo $ebtask[0]['askAmountEBT'];
-                                                            }
-                                                            else
-                                                            {
-                                                              echo "<td colspan=\"3\">There is no ASK exists</td>";
+                                                          } else {
+                                                                echo "<td colspan=\"3\">There is no ASK exists</td>";
                                                             }
                                                             ?></td>
-                                                            <td><?php if(!empty($ebtask))
-                                                              {
+                                                            <td><?php if (!empty($ebtask)) {
                                                                 echo $ebtask[0]['askRate'];
-                                                              }
+                                                            }
                                                               ?></td>
-                                                              <td><?php if(!empty($ebtask))
-                                                                {
+                                                              <td><?php if (!empty($ebtask)) {
                                                                   echo $ebtask[0]['askAmountBTC'];
-                                                                }
+                                                              }
                                                                 ?></td>
-                                                                <td><?php if(!empty($ebtask))
-                                                                  {
+                                                                <td><?php if (!empty($ebtask)) {
                                                                     echo $ebtask[0]['statusName'];
-                                                                  }
+                                                                }
                                                                   ?></td>
                                                                 </tr>
 
@@ -508,8 +464,8 @@ $.getJSON(url_api + '/tradebchmarket/getAllBidBCH', function (data) {
 
 
                                                     </div>
-                                                  </div>   
-                                                </div>  
+                                                  </div>
+                                                </div>
                                                 <div class="col-md-6">
                                                   <div class="card style" style="min-height: 269px;">
                                                     <div class="card-header bg-success">
@@ -518,7 +474,7 @@ $.getJSON(url_api + '/tradebchmarket/getAllBidBCH', function (data) {
                                                     <div class="card-body">
                                                       <table class="table table-responsive table-hover table-outline mb-0">
                                                         <thead class="thead-default">
-                                                          <tr>          
+                                                          <tr>
                                                             <th>Currency Name</th>
                                                             <th>Ammount</th>
                                                             <th>Action</th>
@@ -526,28 +482,27 @@ $.getJSON(url_api + '/tradebchmarket/getAllBidBCH', function (data) {
                                                         </thead>
                                                         <tbody>
 
-                                                         <?php if(!empty($depositwithdraw))
-                                                         { $i = 0;
-                                                          foreach ($depositwithdraw as $value) {
-                                                            echo '<tr>
+                                                         <?php if (!empty($depositwithdraw)) {
+                                                                      $i = 0;
+                                                                      foreach ($depositwithdraw as $value) {
+                                                                          echo '<tr>
 
                                                             <td>'.$value['currencyName'].'/BTC</td>
                                                             <td>'.$value['amount'].'</td>
                                                             <td>'.$value['action'].'</td>
 
                                                           </tr>';
-                                                          if ($i++ == 3){
-                                                            break;
-                                                          }
-                                                        }
-
-                                                      }
+                                                                          if ($i++ == 3) {
+                                                                              break;
+                                                                          }
+                                                                      }
+                                                                  }
 
                                                       ?>
                                                     </tbody>
                                                   </table>
                                                 </div>
-                                              </div>   
+                                              </div>
                                             </div>
                                             <div class="col-md-6">
                                               <div class="card style" >
@@ -557,51 +512,52 @@ $.getJSON(url_api + '/tradebchmarket/getAllBidBCH', function (data) {
                                                 <div class="card-body">
                                              <table class="table table-responsive table-hover table-outline mb-0">
                                                     <thead class="thead-default">
-                                                           
-                                                        <tr>  
+
+                                                        <tr>
                                                           <th>Currency Name</th>
                                                           <th>Date</th>
-                                                          
+
                                                           <th>Type</th>
                                                           <th>Amount</th>
                                                           <th>Confirmations</th>
 
                                                         </tr>
 
-                                                      
+
                                                     </thead>
                                                     <tbody>
                                                       <!-- Transaction list BTC -->
                                                       <tr>
                                                         <td>BTC</td>
-                                                        
+
                                                         <?php
                                                         $bold_txxs = "";
-                                                        if(count($transactionList_BTC)>0)
-                                                          { $i = 0;
-                                                           foreach(array_reverse($transactionList_BTC) as $transaction) { 
-                                                            if($transaction['category']=="send") { $tx_type = '<b style="color: #FF0000;">Sent</b>'; } else if($transaction['category']=="receive"){ $tx_type = '<b style="color: #01DF01;">Received</b>'; } else {
-                                                              $tx_type = '<b style="color: #01DF01;">Admin</b>';
+                                                        if (count($transactionList_BTC)>0) {
+                                                            $i = 0;
+                                                            foreach (array_reverse($transactionList_BTC) as $transaction) {
+                                                                if ($transaction['category']=="send") {
+                                                                    $tx_type = '<b style="color: #FF0000;">Sent</b>';
+                                                                } elseif ($transaction['category']=="receive") {
+                                                                    $tx_type = '<b style="color: #01DF01;">Received</b>';
+                                                                } else {
+                                                                    $tx_type = '<b style="color: #01DF01;">Admin</b>';
 
-                                                              $transaction['confirmations'] = 'Confirmed ';
-
-                                                            }
-                                                            echo 
-                                                            '<td>'.date('n/j/Y h:i a',$transaction['time']).'</td>
+                                                                    $transaction['confirmations'] = 'Confirmed ';
+                                                                }
+                                                                echo
+                                                            '<td>'.date('n/j/Y h:i a', $transaction['time']).'</td>
 
                                                             <td>'.$tx_type.'</td>
                                                             <td>'.abs($transaction['amount']).'</td>
                                                             <td>'.$transaction['confirmations'].'</td>';
-                                                            if ($i++ == 0){
-                                                              break;
+                                                                if ($i++ == 0) {
+                                                                    break;
+                                                                }
                                                             }
-                                                          }
+                                                        } elseif ((count($transactionList_BTC)== 0)) {
+                                                            echo "<td colspan=\"3\">There is no Transaction exists</td>";
                                                         }
-                                                        else if((count($transactionList_BTC)== 0))
-                                                        {
-                                                          echo "<td colspan=\"3\">There is no Transaction exists</td>";
-                                                        }
-                                                        ?>      
+                                                        ?>
 
                                                       </tr>
                                                       <!-- Transaction list BCH -->
@@ -610,31 +566,32 @@ $.getJSON(url_api + '/tradebchmarket/getAllBidBCH', function (data) {
 
                                                         <?php
                                                         $bold_txxs = "";
-                                                        if(count($transactionList_BCH)>0)
-                                                          { $i = 0;
-                                                           foreach(array_reverse($transactionList_BCH) as $transaction) { 
-                                                            if($transaction['category']=="send") { $tx_type = '<b style="color: #FF0000;">Sent</b>'; } else if($transaction['category']=="receive"){ $tx_type = '<b style="color: #01DF01;">Received</b>'; } else {
-                                                              $tx_type = '<b style="color: #01DF01;">Admin</b>';
+                                                        if (count($transactionList_BCH)>0) {
+                                                            $i = 0;
+                                                            foreach (array_reverse($transactionList_BCH) as $transaction) {
+                                                                if ($transaction['category']=="send") {
+                                                                    $tx_type = '<b style="color: #FF0000;">Sent</b>';
+                                                                } elseif ($transaction['category']=="receive") {
+                                                                    $tx_type = '<b style="color: #01DF01;">Received</b>';
+                                                                } else {
+                                                                    $tx_type = '<b style="color: #01DF01;">Admin</b>';
 
-                                                              $transaction['confirmations'] = 'Confirmed ';
-
-                                                            }
-                                                            echo 
-                                                            '<td>'.date('n/j/Y h:i a',$transaction['time']).'</td>
+                                                                    $transaction['confirmations'] = 'Confirmed ';
+                                                                }
+                                                                echo
+                                                            '<td>'.date('n/j/Y h:i a', $transaction['time']).'</td>
 
                                                             <td>'.$tx_type.'</td>
                                                             <td>'.abs($transaction['amount']).'</td>
                                                             <td>'.$transaction['confirmations'].'</td>';
-                                                            if ($i++ == 0){
-                                                              break;
+                                                                if ($i++ == 0) {
+                                                                    break;
+                                                                }
                                                             }
+                                                        } elseif ((count($transactionList_BCH)== 0)) {
+                                                              echo "<td colspan=\"3\">There is no Transaction exists</td>";
                                                           }
-                                                          }
-                                                          else if((count($transactionList_BCH)== 0))
-                                                          {
-                                                            echo "<td colspan=\"3\">There is no Transaction exists</td>";
-                                                          }
-                                                          ?>    
+                                                          ?>
 
 
                                                         </tr>
@@ -644,33 +601,34 @@ $.getJSON(url_api + '/tradebchmarket/getAllBidBCH', function (data) {
 
                                                           <?php
                                                           $bold_txxs = "";
-                                                          if(count($transactionList_GDS)>0)
-                                                            { $i = 0;
-                                                             foreach(array_reverse($transactionList_GDS) as $transaction) { 
-                                                              if($transaction['category']=="send") { $tx_type = '<b style="color: #FF0000;">Sent</b>'; } else if($transaction['category']=="receive"){ $tx_type = '<b style="color: #01DF01;">Received</b>'; } else {
-                                                                $tx_type = '<b style="color: #01DF01;">Admin</b>';
+                                                          if (count($transactionList_GDS)>0) {
+                                                              $i = 0;
+                                                              foreach (array_reverse($transactionList_GDS) as $transaction) {
+                                                                  if ($transaction['category']=="send") {
+                                                                      $tx_type = '<b style="color: #FF0000;">Sent</b>';
+                                                                  } elseif ($transaction['category']=="receive") {
+                                                                      $tx_type = '<b style="color: #01DF01;">Received</b>';
+                                                                  } else {
+                                                                      $tx_type = '<b style="color: #01DF01;">Admin</b>';
 
-                                                                $transaction['confirmations'] = 'Confirmed ';
+                                                                      $transaction['confirmations'] = 'Confirmed ';
+                                                                  }
+                                                                  echo '
+                                                              <td>'.date('n/j/Y h:i a', $transaction['time']).'</td>
 
-                                                              }
-                                                              echo '
-                                                              <td>'.date('n/j/Y h:i a',$transaction['time']).'</td>
-                                                              
                                                               <td>'.$tx_type.'</td>
                                                               <td>'.abs($transaction['amount']).'</td>
                                                               <td>'.$transaction['confirmations'].'</td>
 
                                                               ';
-                                                              if ($i++ == 0){
-                                                                break;
+                                                                  if ($i++ == 0) {
+                                                                      break;
+                                                                  }
                                                               }
+                                                          } elseif ((count($transactionList_GDS)== 0)) {
+                                                                echo "<td colspan=\"3\">There is no Transaction exists</td>";
                                                             }
-                                                            }
-                                                            else if((count($transactionList_GDS)== 0))
-                                                            {
-                                                              echo "<td colspan=\"3\">There is no Transaction exists</td>";
-                                                            }
-                                                            ?>    
+                                                            ?>
 
 
                                                           </tr>
@@ -680,41 +638,42 @@ $.getJSON(url_api + '/tradebchmarket/getAllBidBCH', function (data) {
 
                                                             <?php
                                                             $bold_txxs = "";
-                                                            if(count($transactionList_EBT)>0)
-                                                              { $i = 0;
-                                                               foreach(array_reverse($transactionList_EBT) as $transaction) { 
-                                                                if($transaction['category']=="send") { $tx_type = '<b style="color: #FF0000;">Sent</b>'; } else if($transaction['category']=="receive"){ $tx_type = '<b style="color: #01DF01;">Received</b>'; } else {
-                                                                  $tx_type = '<b style="color: #01DF01;">Admin</b>';
+                                                            if (count($transactionList_EBT)>0) {
+                                                                $i = 0;
+                                                                foreach (array_reverse($transactionList_EBT) as $transaction) {
+                                                                    if ($transaction['category']=="send") {
+                                                                        $tx_type = '<b style="color: #FF0000;">Sent</b>';
+                                                                    } elseif ($transaction['category']=="receive") {
+                                                                        $tx_type = '<b style="color: #01DF01;">Received</b>';
+                                                                    } else {
+                                                                        $tx_type = '<b style="color: #01DF01;">Admin</b>';
 
-                                                                  $transaction['confirmations'] = 'Confirmed ';
-
-                                                                }
-                                                                echo '
-                                                                <td>'.date('n/j/Y h:i a',$transaction['time']).'</td>
+                                                                        $transaction['confirmations'] = 'Confirmed ';
+                                                                    }
+                                                                    echo '
+                                                                <td>'.date('n/j/Y h:i a', $transaction['time']).'</td>
 
                                                                 <td>'.$tx_type.'</td>
                                                                 <td>'.abs($transaction['amount']).'</td>
                                                                 <td>'.$transaction['confirmations'].'</td>
 
                                                                 ';
-                                                                if ($i++ == 0){
-                                                                  break;
+                                                                    if ($i++ == 0) {
+                                                                        break;
+                                                                    }
                                                                 }
+                                                            } elseif ((count($transactionList_EBT)== 0)) {
+                                                                  echo "<td colspan=\"3\">There is no Transaction exists</td>";
                                                               }
-                                                              }
-                                                              else if((count($transactionList_EBT)== 0))
-                                                              {
-                                                                echo "<td colspan=\"3\">There is no Transaction exists</td>";
-                                                              }
-                                                              ?>    
+                                                              ?>
 
 
-                                                            </tr>  
+                                                            </tr>
                                                           </tbody>
                                                         </table>
                                                       </div>
-                                                    </div>   
-                                                  </div> 
+                                                    </div>
+                                                  </div>
                                                 </div>
                                               </div>
                                             </div>

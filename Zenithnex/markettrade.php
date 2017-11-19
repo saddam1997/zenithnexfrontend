@@ -13,7 +13,7 @@ ob_end_flush();
     #top {
         height:50px;
         width:100%;
-        
+
 
         margin-left:70px;
         margin-top:10px;
@@ -242,7 +242,6 @@ ob_end_flush();
                         <th>ACTUAL RATE</th>
                         <th>UNITS TOTAL BCH</th>
                         <th>UNITS TOTAL BTC</th>
-                        <th>ACTION</th>
                     </tr>
                 </thead>
 
@@ -325,15 +324,15 @@ include 'footer.php';
     }
 
     /*all data details*/
-    $.ajax({ 
-        type: "POST", url: url_api+ "/user/getAllDetailsOfUser", 
+    $.ajax({
+        type: "POST", url: url_api+ "/user/getAllDetailsOfUser",
         data: {
-            userMailId: '<? echo $user_session;?>'
-        }, 
+            userMailId: '<?php echo $user_session;?>'
+        },
         cache: false, success: function(res)
-        { 
+        {
 
-            
+
 
             bid=res.user.bidsBCH;
             ask=res.user.asksBCH;
@@ -347,7 +346,7 @@ include 'footer.php';
             $('#freezeBTCBalance').append(res.user.FreezedBTCbalance+" ");
 
             for( var i=0; i<finalObj.length; i++)
-            {   
+            {
                 if(finalObj[i].status == 2 ){
                     if(finalObj[i].bidAmountBCH){
                         $('#open_bid_bch').append('<tr><td>'
@@ -357,7 +356,7 @@ include 'footer.php';
                             '</td><td>'
                             +finalObj[i].bidRate+
                             '</td><td>'
-                            +finalObj[i].totalbidAmountBCH+ 
+                            +finalObj[i].totalbidAmountBCH+
                             '</td><td>'
                             +finalObj[i].totalbidAmountBTC+
                             '</td><td><a class="text-danger" onclick="del(id='+finalObj[i].id +',ownwe='+finalObj[i].bidownerBCH+');"><i class="fa fa-window-close fa-2x" aria-hidden="true"></i></a></td></tr>');
@@ -370,7 +369,7 @@ include 'footer.php';
                             '</td><td>'
                             +finalObj[i].askRate+
                             '</td><td>'
-                            +finalObj[i].totalaskAmountBCH+ 
+                            +finalObj[i].totalaskAmountBCH+
                             '</td><td>'
                             +finalObj[i].totalaskAmountBTC+
                             '</td><td><a class="text-danger" onclick="del_ask(id='+finalObj[i].id+',askownerBCH='+finalObj[i].askownerBCH+');" ><i class="fa fa-window-close fa-2x" aria-hidden="true"></i></a>'+
@@ -386,10 +385,10 @@ include 'footer.php';
                             '</td><td>'
                             +finalObj[i].bidRate+
                             '</td><td>'
-                            +finalObj[i].totalbidAmountBCH+ 
+                            +finalObj[i].totalbidAmountBCH+
                             '</td><td>'
                             +finalObj[i].totalbidAmountBTC+
-                            '</td><td><a class="text-danger" onclick="del(id='+finalObj[i].id +',ownwe='+finalObj[i].bidownerBCH+');"><i class="fa fa-window-close fa-2x" aria-hidden="true"></i></a></td></tr>');
+                            '</td></tr>');
                     }
                     else{
                         $('#market_ask_bch').append('<tr><td>'
@@ -399,19 +398,18 @@ include 'footer.php';
                             '</td><td>'
                             +finalObj[i].askRate+
                             '</td><td>'
-                            +finalObj[i].totalaskAmountBCH+ 
+                            +finalObj[i].totalaskAmountBCH+
                             '</td><td>'
                             +finalObj[i].totalaskAmountBTC+
-                            '</td><td><a class="text-danger"onclick="del_ask(id='+finalObj[i].id+',askownerBCH='+finalObj[i].askownerBCH+');" ><i class="fa fa-window-close fa-2x" aria-hidden="true"></i></a>'+
                             '</td></tr>');
                     }
                 }
             }
 
-        }, 
-        error: function(err){ 
+        },
+        error: function(err){
 
-        } 
+        }
     });
 
     /*asks data details BCH*/
@@ -425,14 +423,15 @@ include 'footer.php';
             if(data.body.statusCode!=200) return;
 
             var ask_orders = data.body;
-            
+
             $('#ask_btc_bch').empty();
+            $('#ask_current_BCH').empty();
             if(ask_orders.asksBCH.length>0)
             {
                 $('#ask_current_BCH').append(" &nbsp;"+ask_orders.asksBCH[0].askRate+"");
 
                 console.log(data.body.asksBCH.length);
-                
+
                 for (var i = 0; i < 10; i++) {
                     if(i==ask_orders.asksBCH.length) break;
 
@@ -444,30 +443,23 @@ include 'footer.php';
 
         });
 
-
-
-
         /*Bid Data details BCH*/
         iob.socket.get(url_api+'/tradebchmarket/getAllBidBCH',function(err,data)
         {
-
             if(data.body.statusCode!=200) return;
             var bid_orders = data.body;
             $('#bid_btc_bch').empty();
-
             $('#bid_current_BCH').append(" &nbsp;"+bid_orders.bidsBCH[0].bidRate+"");
-            console.log(data.body.bidsBCH.length);
-            
+            console.log("!!!!"+ data.body.bidsBCH.length);
+            console.log("working here");
             for (var i = 0; i < 10; i++) {
                 if(i==bid_orders.bidsBCH.length) break;
-
                 $('#bid_btc_bch').append('<tr><td>' + bid_orders.bidsBCH[i].bidAmountBTC + '</td><td>' + bid_orders.bidsBCH[i].bidAmountBCH + '</td><td>' + bid_orders.bidsBCH[i].bidRate + '</td></tr>')
             }
-
         });
 
 
-        /*asks data details GDS*/ 
+        /*asks data details GDS*/
         iob.socket.get(url_api+'/tradegdsmarket/getAllAskGDS',function(err,data)
         {
 
@@ -540,81 +532,76 @@ include 'footer.php';
 
 
         /**********************buy data*********************************************************************************/
-        
+
     });
+
     function buy_data_bch() {
 
-            var bidAmountBCH = document.getElementById('bidAmountBCH').value;
-            var bidRateBCH = document.getElementById('bidRateBCH').value;
-            var bidAmountBTC = document.getElementById('bidAmountBTC').value;
+        var bidAmountBCH = document.getElementById('bidAmountBCH').value;
+        var bidRateBCH = document.getElementById('bidRateBCH').value;
+        var bidAmountBTC = document.getElementById('bidAmountBTC').value;
 
-            var bidownerId=user_details.id;
-            var spendingPassword='12';
+        var bidownerId=user_details.id;
+        var spendingPassword='12';
 
-            var json_bid_bch = {
-              "bidAmountBTC":bidAmountBTC,
-              "bidAmountBCH":bidAmountBCH,
-              "bidRate":bidRateBCH,
-              "bidownerId":bidownerId,
-              "spendingPassword":spendingPassword
-          }
+        var json_bid_bch = {
+          "bidAmountBTC":bidAmountBTC,
+          "bidAmountBCH":bidAmountBCH,
+          "bidRate":bidRateBCH,
+          "bidownerId":bidownerId,
+          "spendingPassword":spendingPassword
+      }
+
+      $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: url_api+"/tradebchmarket/addBidBCHMarket",
+        data: JSON.stringify(json_bid_bch),
+        success: function(result){
+            console.log(result);
+           $('#error_message1').empty();
+            if (result.statusCode!=200)
+            {
+                $('#error_message1').append(" &nbsp;"+result.message+"");
+            }
+        }
+        });
+    }
+
+    function sell_data()
+    {
+
+        var askBCHAmount = document.getElementById('askBCHAmount').value;
+        var askRateBCH = document.getElementById('askRateBCH').value;
+        var askBTCAmount = document.getElementById('askBTCAmount').value;
+        var bidownerId=user_details.id;
+        var spendingPassword='12';
+
+        var json_ask_bch = {
+          "askAmountBTC":askBTCAmount,
+          "askAmountBCH":askBCHAmount,
+          "askRate":askRateBCH,
+          "askownerId":bidownerId,
+          "spendingPassword":spendingPassword
+      }
+
 
           $.ajax({
             type: "POST",
             contentType: "application/json",
-            url: url_api+"/tradebchmarket/addBidBCHMarket",
-            data: JSON.stringify(json_bid_bch),
+            url: url_api+"/tradebchmarket/addAskBCHMarket",
+            data: JSON.stringify(json_ask_bch),
             success: function(result){
                 console.log(result);
-               $('#error_message1').empty();
-                if (result.statusCode!=200)
-                {
-                    $('#error_message1').append(" &nbsp;"+result.message+"");
-                }
+                $('#error_message').empty();
+
+            if (result.statusCode!=200)
+            {
+                $('#error_message').append(" &nbsp;"+result.message+"");
             }
-            });
-        }
 
-        function sell_data()
-        {
+            }
+        });
 
-            var askBCHAmount = document.getElementById('askBCHAmount').value;
-            var askRateBCH = document.getElementById('askRateBCH').value;
-            var askBTCAmount = document.getElementById('askBTCAmount').value;
-            var bidownerId=user_details.id;
-            var spendingPassword='12';
-
-            var json_ask_bch = {
-              "askAmountBTC":askBTCAmount,
-              "askAmountBCH":askBCHAmount,
-              "askRate":askRateBCH,
-              "askownerId":bidownerId,
-              "spendingPassword":spendingPassword
-          }
-
-
-              $.ajax({
-                type: "POST",
-                contentType: "application/json",
-                url: url_api+"/tradebchmarket/addAskBCHMarket",
-                data: JSON.stringify(json_ask_bch),
-                success: function(result){
-                    console.log(result);
-                    $('#error_message').empty();
-                    
-                if (result.statusCode!=200)
-                {
-                    $('#error_message').append(" &nbsp;"+result.message+"");
-                }
-
-                }
-            });
-
-        }
+    }
 </script>
-
-
-
-
-
-

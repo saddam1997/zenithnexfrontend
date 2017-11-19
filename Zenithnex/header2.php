@@ -53,7 +53,7 @@ $responseData4 = json_decode($response4, TRUE);
 if(isset($responseData1['user']))
 {
 
-  $btc_balance = $responseData1['user']['BTCMainbalance'];
+  $btc_balance = $responseData1['user']['BTCbalance'];
   
   
 }
@@ -61,7 +61,7 @@ if(isset($responseData2['user']))
 {
 
   
-  $bcc_balance = $responseData2['user']['BCHMainbalance'];
+  $bcc_balance = $responseData2['user']['BCHbalance'];
   
   
 
@@ -71,7 +71,7 @@ if(isset($responseData3['user']))
 {
 
   
-  $gds_balance = $responseData3['user']['GDSMainbalance'];
+  $gds_balance = $responseData3['user']['GDSbalance'];
   
   
 
@@ -81,7 +81,7 @@ if(isset($responseData4['user']))
 {
 
   
-  $ebt_balance = $responseData4['user']['EBTMainbalance'];
+  $ebt_balance = $responseData4['user']['EBTbalance'];
  
 }
 

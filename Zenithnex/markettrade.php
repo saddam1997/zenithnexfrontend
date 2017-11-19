@@ -1,6 +1,10 @@
 <?php
 ob_start();
 include 'header.php';
+page_protect();
+if (!isset($_SESSION['user_id'])) {
+    header("location:logout.php");
+}
 $user_session = $_SESSION['user_session'];
 ob_end_flush();
 ?>
@@ -231,7 +235,7 @@ ob_end_flush();
             </table>
         </div>
 
-        <h2>Market</h2>
+        <h2>My order history</h2>
         <div class="table-responsive">
             <table id="example" class="table table-striped table-bordered" width="100%" cellspacing="0">
                 <thead>
@@ -301,6 +305,7 @@ include 'footer.php';
                     "bidownerId": bidownerId
                 },
                 success: function(result){
+                    alert('Data Delete Successfully');
 
                 }
             });
@@ -317,6 +322,7 @@ include 'footer.php';
 
                 },
                 success: function(result){
+                    alert('Data Delete Successfully');
 
                 }
             });
@@ -472,10 +478,6 @@ include 'footer.php';
 
 
         });
-
-
-
-
         /*Bids data details GDS*/
         iob.socket.get(url_api+'/tradegdsmarket/getAllBidGDS',function(err,data)
         {

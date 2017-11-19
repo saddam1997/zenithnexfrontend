@@ -1,6 +1,11 @@
 <?php
 ob_start();
 include 'header.php';
+page_protect();
+if(!isset($_SESSION['user_id']))
+{
+  header("location:logout.php");
+}
 $user_session = $_SESSION['user_session'];
 ob_end_flush();
 
@@ -241,14 +246,15 @@ ob_end_flush();
                         <th>UNITS FILLED GDS</th>
                         <th>ACTUAL RATE</th>
                         <th>UNITS TOTAL GDS</th>
+                        <th>UNITS TOTAL BTC</th>
                         <th>ACTION</th>
                     </tr>
                 </thead>
 
-                <tbody id="bid_buy">
+                <tbody id="open_bid_gds">
 
                 </tbody>
-                <tbody id="bid_ask">
+                <tbody id="open_ask_gds">
 
                 </tbody>
             </table>
@@ -263,14 +269,14 @@ ob_end_flush();
                         <th>UNITS FILLED GDS</th>
                         <th>ACTUAL RATE</th>
                         <th>UNITS TOTAL GDS</th>
-                        <th>ACTION</th>
+                       <th>UNITS TOTAL BTC</th>
                     </tr>
                 </thead>
 
-                <tbody id="market_bid_buy">
+                <tbody id="market_bid_gds">
 
                 </tbody>
-                <tbody id="market_bid_ask">
+                <tbody id="market_ask_gds">
 
                 </tbody>
             </table>
@@ -342,7 +348,7 @@ include 'footer.php';
 
                             if(i==ask_orders.asksGDS.length) break;
 
-                            $('#ask_btc_gds').append('<tr><td>' + ask_orders.asksGDS[i].askAmountBTC + '</td><td>' + ask_orders.asksGDS[i].askAmountGDS + '</td><td>' + ask_orders.asksGDS[i].askRate + '</td></tr>')
+                            $('#ask_btc_gds').append('<tr><td>' + ask_orders.asksGDS[i].askRate + '</td><td>' + ask_orders.asksGDS[i].askAmountGDS + '</td><td>' + ask_orders.asksGDS[i].askAmountBTC + '</td></tr>')
                         }
 
                     });
@@ -437,54 +443,60 @@ include 'footer.php';
                             {
                                 if(finalObj[i].status == 2 ){
                                     if(finalObj[i].bidAmountGDS){
-                                        $('#bid_buy').append('<tr><td>'
+                                        $('#open_bid_gds').append('<tr><td>'
                                             +finalObj[i].createdAt+
                                             '</td><td>BID</td><td>'
                                             +finalObj[i].bidAmountGDS+
                                             '</td><td>'
                                             +finalObj[i].bidRate+
                                             '</td><td>'
+                                            +finalObj[i].totalbidAmountGDS+
+                                            '</td><td>'
                                             +finalObj[i].totalbidAmountBTC+
-                                            '</td><td><a class="text-danger" onclick="del(id='+finalObj[i].id+',bidownerBCH='+finalObj[i].bidownerGDS+');"><i class="fa fa-window-close fa-2x" aria-hidden="true"></i></a>'+
+                                            '</td><td><a class="text-danger" onclick="del(id='+finalObj[i].id+',bidownerGDS='+finalObj[i].bidownerGDS+');"><i class="fa fa-window-close fa-2x" aria-hidden="true"></i></a>'+
                                             '</td></tr>');
                                     }
                                     else{
-                                        $('#bid_ask').append('<tr><td>'
+                                        $('#open_ask_gds').append('<tr><td>'
                                             +finalObj[i].createdAt+
                                             '</td><td>ASK</td><td>'
                                             +finalObj[i].askAmountGDS+
                                             '</td><td>'
                                             +finalObj[i].askRate+
                                             '</td><td>'
+                                             +finalObj[i].totalaskAmountGDS+
+                                            '</td><td>'
                                             +finalObj[i].totalaskAmountBTC+
-                                            '</td><td><a class="text-danger"  onclick="del_ask(id='+finalObj[i].id+',bidownerBCH='+finalObj[i].askownerGDS+');"><i class="fa fa-window-close fa-2x" aria-hidden="true"></i></a>'+
+                                            '</td><td><a class="text-danger"  onclick="del_ask(id='+finalObj[i].id+',askownerGDS='+finalObj[i].askownerGDS+');"><i class="fa fa-window-close fa-2x" aria-hidden="true"></i></a>'+
                                             '</td></tr>');
                                     }
                                 }
                                 else
                                 {
                                     if(finalObj[i].bidAmountGDS){
-                                        $('#market_bid_buy').append('<tr><td>'
+                                        $('#market_bid_gds').append('<tr><td>'
                                             +finalObj[i].createdAt+
                                             '</td><td>BID</td><td>'
                                             +finalObj[i].bidAmountGDS+
                                             '</td><td>'
                                             +finalObj[i].bidRate+
                                             '</td><td>'
+                                             +finalObj[i].totalbidAmountGDS+
+                                            '</td><td>'
                                             +finalObj[i].totalbidAmountBTC+
-                                            '</td><td><a class="text-danger"  onclick="del(id='+finalObj[i].id+',bidownerBCH='+finalObj[i].bidownerGDS+');"><i class="fa fa-window-close fa-2x" aria-hidden="true"></i></a>'+
                                             '</td></tr>');
                                     }
                                     else{
-                                        $('#market_bid_ask').append('<tr><td>'
+                                        $('#market_ask_gds').append('<tr><td>'
                                             +finalObj[i].createdAt+
                                             '</td><td>ASK</td><td>'
                                             +finalObj[i].askAmountGDS+
                                             '</td><td>'
                                             +finalObj[i].askRate+
                                             '</td><td>'
+                                             +finalObj[i].totalaskAmountGDS+
+                                            '</td><td>'
                                             +finalObj[i].totalaskAmountBTC+
-                                            '</td><td><a class="text-danger"  onclick="del_ask(id='+finalObj[i].id+',bidownerBCH='+finalObj[i].askownerGDS+');"><i class="fa fa-window-close fa-2x" aria-hidden="true"></i></a>'+
                                             '</td></tr>');
                                     }
                                 }
@@ -517,37 +529,38 @@ function sumsell() {
 }
 
                 function del(uid,gdsbid) {
-                    console.log(uid,gdsbid); return;
+                    
 
                     if (confirm("Do You Want To Delete!")) {
                         $.ajax({
                             type: "POST",
                             url: url_api+"/tradegdsmarket/removeBidGDSMarket",
                             data:  { 
-                                "bidId":uid,
+                                "bidIdGDS":uid,
                                 "bidownerId": gdsbid
                             }
                             ,
                             success: function(result){
-                                console.log(result);
-                                alert('Data Delete successfull');
+                                alert('Data Delete Successfully');
+                                
+                                
                             }
                         });
                     }
                 }
                 function del_ask(askid,askbid) {
-                    console.log(askid,askbid); 
+                    
                     if (confirm("Do You Want To Delete!")) {
                         $.ajax({
                             type: "POST",
                             url: url_api+"/tradegdsmarket/removeAskGDSMarket",
                             data: { 
-                                "askId":askid,
+                                "askIdGDS":askid,
                                 "askownerId":askbid
                         },
                         success: function(result){
-                            console.log(result);
-                            alert('Data Delete successfull');
+                             alert('Data Delete Successfully');
+                            
                         }
                     });
                     }

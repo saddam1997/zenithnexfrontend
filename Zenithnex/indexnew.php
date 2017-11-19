@@ -101,19 +101,19 @@
 	<h4>Resources</h4>
 	<ul class="nav">
 	  <li class="nav-item">
-	    <a href="ZenithNEX.com/blog/en/">Blog</a>
+	    <a href="">Blog</a>
 	  </li>
 	  <li class="nav-item">
-	    <a href="ZenithNEX.com/help/en/">Help Centre</a>
+	    <a href="">Help Centre</a>
 	  </li>
 	  <li class="nav-item">
-	    <a href="ZenithNEX.com/en/price">Bitcoin Price</a>
+	    <a href="">Bitcoin Price</a>
 	  </li>
 	  <li class="nav-item">
-	    <a href="ZenithNEX.com/learn/en/">Learning Portal</a>
+	    <a href="">Learning Portal</a>
 	  </li>
 	  <li class="nav-item">
-	    <a href="ZenithNEX.com/en/countries">Fees &amp; Features</a>
+	    <a href="">Fees &amp; Features</a>
 	  </li>
 	</ul>
 
@@ -124,10 +124,10 @@
 	<h4>Products</h4>
 	<ul class="nav">
 	  <li class="nav-item">
-	    <a href="ZenithNEX.com/en/exchange">Exchange</a>
+	    <a href="">Exchange</a>
 	  </li>
 	  <li class="nav-item">
-	    <a href="ZenithNEX.com/en/api">API</a>
+	    <a href="">API</a>
 	  </li>
 	</ul>
 
@@ -138,10 +138,10 @@
 	<h4>About</h4>
 	<ul class="nav">
 	  <li class="nav-item">
-	    <a href="ZenithNEX.com/en/about">Company</a>
+	    <a href="">Company</a>
 	  </li>
 	  <li class="nav-item">
-	    <a href="ZenithNEX.com/en/careers">Careers</a>
+	    <a href="">Careers</a>
 	  </li>
 	</ul>
 

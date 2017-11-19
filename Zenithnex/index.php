@@ -121,18 +121,19 @@ include 'header.php';
               <div class="tab-content">
                 <div id="home" class="tab-pane fade in active">
                   <h3>BCH</h3>
-                  <p><div id="container"></div></p>
+                  <p><div id="container1"></div></p>
                 </div>
                 <div id="menu1" class="tab-pane fade">
                   <h3>GDS</h3>
-                  <p><div id="container"></div></p>
+                  <p><div id="container2"></div></p>
                 </div>
                 <div id="menu2" class="tab-pane fade">
                   <h3>EBT</h3>
-                  <p><div id="container"></div></p>
+                  <p><div id="container3"></div></p>
                 </div>
               </div>
             </div>
+           <!--  BCH Chart -->
 <script>
 $.getJSON(url_api + '/tradebchmarket/getAllBidBCH', function (data) {
     var datanew = [];
@@ -152,7 +153,7 @@ $.getJSON(url_api + '/tradebchmarket/getAllBidBCH', function (data) {
       }
 
     // Create the chart
-      Highcharts.stockChart('container', {
+      Highcharts.stockChart('container1', {
 
 
         title: {
@@ -195,6 +196,207 @@ $.getJSON(url_api + '/tradebchmarket/getAllBidBCH', function (data) {
 
         series: [{
             name: 'BCH',
+            type: 'area',
+            data: arrayObject,
+            gapSize: 5,
+            tooltip: {
+                valueDecimals: 2
+            },
+            fillColor: {
+                linearGradient: {
+                    x1: 0,
+                    y1: 0,
+                    x2: 0,
+                    y2: 1
+                },
+                stops: [
+                    [0, Highcharts.getOptions().colors[0]],
+                    [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                ]
+            },
+            threshold: null
+        }]
+    });
+
+
+    $('#small').click(function () {
+        chart.setSize(400);
+    });
+
+    $('#large').click(function () {
+        chart.setSize(800);
+    });
+
+    $('#auto').click(function () {
+        chart.setSize(null);
+    });
+});
+
+</script>
+
+<!-- GDS Chart -->
+<script>
+$.getJSON(url_api + '/tradegdsmarket/getAllBidGDS', function (data) {
+    var datanew = [];
+   //console.log(data);
+     /* var bid_orders = $.parseJSON(data);
+    for(var i = 0; i < data.length ; i++){
+           console.log('jfd' + bid_orders.bidsBCH[i].bidRate + bid_orders.bidsBCH[i].createdAt);
+    }*/
+    var arrayObject = [];
+    var  temp =data.bidsGDS;
+    var date = 1317888000000;
+      for (var i = 0; i < temp.length; i++) {
+
+        date = date + 60000;
+        arrayObject.push([date , temp[i].bidRate]);
+
+      }
+
+    // Create the chart
+      Highcharts.stockChart('container2', {
+
+
+        title: {
+            text: 'GDS Price'
+        },
+
+        subtitle: {
+            text: 'Goods Coin Price Chart'
+        },
+
+        xAxis: {
+            breaks: [{ // Nights
+                from: Date.UTC(2011, 9, 6, 16),
+                to: Date.UTC(2011, 9, 7, 8),
+                repeat: 24 * 36e5
+            }, { // Weekends
+                from: Date.UTC(2011, 9, 7, 16),
+                to: Date.UTC(2011, 9, 10, 8),
+                repeat: 7 * 24 * 36e5
+            }]
+        },
+
+        rangeSelector: {
+            buttons: [{
+                type: 'hour',
+                count: 1,
+                text: '1h'
+            }, {
+                type: 'day',
+                count: 1,
+                text: '1D'
+            }, {
+                type: 'all',
+                count: 1,
+                text: 'All'
+            }],
+            selected: 1,
+            inputEnabled: false
+        },
+
+        series: [{
+            name: 'GDS',
+            type: 'area',
+            data: arrayObject,
+            gapSize: 5,
+            tooltip: {
+                valueDecimals: 2
+            },
+            fillColor: {
+                linearGradient: {
+                    x1: 0,
+                    y1: 0,
+                    x2: 0,
+                    y2: 1
+                },
+                stops: [
+                    [0, Highcharts.getOptions().colors[0]],
+                    [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                ]
+            },
+            threshold: null
+        }]
+    });
+
+
+    $('#small').click(function () {
+        chart.setSize(400);
+    });
+
+    $('#large').click(function () {
+        chart.setSize(800);
+    });
+
+    $('#auto').click(function () {
+        chart.setSize(null);
+    });
+});
+
+</script>
+<!-- EBT Chart -->
+<script>
+$.getJSON(url_api + '/tradeebtmarket/getAllBidEBT', function (data) {
+    var datanew = [];
+   //console.log(data);
+     /* var bid_orders = $.parseJSON(data);
+    for(var i = 0; i < data.length ; i++){
+           console.log('jfd' + bid_orders.bidsBCH[i].bidRate + bid_orders.bidsBCH[i].createdAt);
+    }*/
+    var arrayObject = [];
+    var  temp =data.bidsEBT;
+    var date = 1317888000000;
+      for (var i = 0; i < temp.length; i++) {
+
+        date = date + 60000;
+        arrayObject.push([date , temp[i].bidRate]);
+
+      }
+
+    // Create the chart
+      Highcharts.stockChart('container3', {
+
+
+        title: {
+            text: 'EBT Price'
+        },
+
+        subtitle: {
+            text: 'EBT Classic Price Chart'
+        },
+
+        xAxis: {
+            breaks: [{ // Nights
+                from: Date.UTC(2011, 9, 6, 16),
+                to: Date.UTC(2011, 9, 7, 8),
+                repeat: 24 * 36e5
+            }, { // Weekends
+                from: Date.UTC(2011, 9, 7, 16),
+                to: Date.UTC(2011, 9, 10, 8),
+                repeat: 7 * 24 * 36e5
+            }]
+        },
+
+        rangeSelector: {
+            buttons: [{
+                type: 'hour',
+                count: 1,
+                text: '1h'
+            }, {
+                type: 'day',
+                count: 1,
+                text: '1D'
+            }, {
+                type: 'all',
+                count: 1,
+                text: 'All'
+            }],
+            selected: 1,
+            inputEnabled: false
+        },
+
+        series: [{
+            name: 'EBT',
             type: 'area',
             data: arrayObject,
             gapSize: 5,
@@ -297,7 +499,7 @@ $.getJSON(url_api + '/tradebchmarket/getAllBidBCH', function (data) {
                     <tr>
 
                       <th>Market</th>
-                      <th>Ammount</th>
+                      <th>Amount</th>
                       <th>BID</th>
                       <th>Total BTC</th>
                       <th>Status</th>
@@ -381,7 +583,7 @@ $.getJSON(url_api + '/tradebchmarket/getAllBidBCH', function (data) {
                                           <tr>
 
                                             <th>Market</th>
-                                            <th>Ammount</th>
+                                            <th>Amount</th>
                                             <th>ASK</th>
                                             <th>Total BTC</th>
                                             <th>Status</th>

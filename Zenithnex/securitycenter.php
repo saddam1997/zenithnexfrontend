@@ -210,7 +210,7 @@ include 'header.php';
 
 						</div>
 						<div class="form-group">
-							<label class="form-form-control-label" for="inputError1">New Passowrd</label>
+							<label class="form-form-control-label" for="inputError1">New Password</label>
 							<input  id="signuppassword" name="signuppassword" autocomplete="off" class="form-control" type="password" value="">
 
 						</div>
@@ -242,7 +242,7 @@ include 'header.php';
 
 						</div>
 						<div class="form-group">
-							<label class="form-form-control-label" for="inputError1">New Passowrd</label>
+							<label class="form-form-control-label" for="inputError1">New Password</label>
 							<input id="spendingpassword" name="spendingpassword" class="form-control" autocomplete="off" type="password" value="">
 
 						</div>
